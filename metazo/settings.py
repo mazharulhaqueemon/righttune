@@ -111,20 +111,17 @@ CHANNEL_LAYERS = {
 #     }
 # }
 #  this database config need for local and c panel config
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'dm4bqhkl9603d',
-#         'USER': 'xqzzsskzwsnakr',
-#         'PASSWORD': 'a0cfaecfa9339006edf9b813f56b38305e5ee65b68cc411f3e232930eefbf0fa',
-#         'HOST': 'ec2-52-54-200-216.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'righttunedb_rgml',
+        'USER': 'righttunedb_rgml_user',
+        'PASSWORD': '7QTBJeNmnYLpliJMmlXLCEFGbyXbcrLd',
+        'HOST': 'dpg-cjsqcem8b8as73fdjpn0-a',
+        'PORT': '5432',
+    }
 }
+
 
 
 
