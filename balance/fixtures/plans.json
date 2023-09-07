@@ -1,0 +1,32 @@
+[
+{
+    "model": "balance.plan",
+    "pk": 1,
+    "fields": {
+        "name": "Gold",
+        "price": "230.00",
+        "minutes": 120,
+        "days": 15
+    }
+},
+{
+    "model": "balance.plan",
+    "pk": 2,
+    "fields": {
+        "name": "Platinum",
+        "price": "345.00",
+        "minutes": 180,
+        "days": 30
+    }
+},
+{
+    "model": "balance.plan",
+    "pk": 3,
+    "fields": {
+        "name": "Silver",
+        "price": "115.00",
+        "minutes": 60,
+        "days": 7
+    }
+}
+]
