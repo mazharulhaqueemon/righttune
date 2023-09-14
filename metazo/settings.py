@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
-import django_heroku
 import dj_database_url
 import os
 # Jazzmin Custom Admin Panel
@@ -174,7 +173,6 @@ STATICFILES_DIRS = [Path.joinpath(BASE_DIR, 'static_cdn')]
 
 STATIC_ROOT = Path.joinpath(BASE_DIR,'static_root')
 MEDIA_ROOT = Path.joinpath(BASE_DIR,'media_root')
-django_heroku.settings(locals())
 # forever-cacheable files and compression----------------------
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
