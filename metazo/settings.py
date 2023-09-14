@@ -117,7 +117,7 @@ DATABASES = {
         'NAME': 'righttunedb_rgml',
         'USER': 'righttunedb_rgml_user',
         'PASSWORD': '7QTBJeNmnYLpliJMmlXLCEFGbyXbcrLd',
-        'HOST': 'dpg-cjsqcem8b8as73fdjpn0-a',
+        'HOST': 'postgres://righttunedb_rgml_user:7QTBJeNmnYLpliJMmlXLCEFGbyXbcrLd@dpg-cjsqcem8b8as73fdjpn0-a/righttunedb_rgml',
         'PORT': '5432',
     }
 }
