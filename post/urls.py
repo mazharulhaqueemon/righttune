@@ -11,5 +11,5 @@ urlpatterns = [
     path('like-create/<int:post_id>/', PostLikeCreateapi.as_view(), name='post-like'),
     path('post-comment-create/<int:post_id>/', PostCommentCreateapi.as_view(), name='comment-list'),
     path('stories/story-create/',StoriesCreate.as_view(),name="story_create"),
-    path('stories/cover-story-list/',StoriesList.as_view(),name="story_list")
+    path('stories/cover-story-list/',StoriesList.as_view(),name="story_list"),
 ]
