@@ -122,7 +122,7 @@ CHANNEL_LAYERS = {
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse("postgres://righttunedb_rgml_user:7QTBJeNmnYLpliJMmlXLCEFGbyXbcrLd@dpg-cjsqcem8b8as73fdjpn0-a.singapore-postgres.render.com/righttunedb_rgml")
+    'default': dj_database_url.parse("postgres://righttunedb:EUYmKMqdwLSpdqU2s551Pg0pY79DNlLC@dpg-cld1vjd4lnec738bj6b0-a.singapore-postgres.render.com/righttunedb_xhax")
 }
 
 
