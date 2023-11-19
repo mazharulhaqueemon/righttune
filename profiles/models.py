@@ -41,6 +41,7 @@ class Profile(models.Model):
     country_name = models.CharField(max_length=250, blank=True, null=True)
     mobile_number = models.CharField(max_length=250, blank=True, null=True)
     streaming_title = models.CharField(max_length=250, blank=True, null=True)
+    balance = models.IntegerField(default=0)
     earn_coins = models.IntegerField(default=0)
     earn_loves = models.IntegerField(default=0)
     followers = models.ManyToManyField(User, related_name='following_profile',blank=True,db_constraint=False)
