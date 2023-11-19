@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import User
-from profiles.models import Profile
+from profiles.models import Profile,FrameStore
 from favorites.models import FavoriteUser
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -86,3 +86,10 @@ class FriendListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['profile']
+
+# for frame
+class FrameStoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FrameStore
+        fields = '__all__'
+

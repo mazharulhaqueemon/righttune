@@ -70,15 +70,33 @@ class Profile(models.Model):
         """
         return self.blocked_users.filter(id=user.id).exists()
 
+class FrameStore(models.Model):
+    image = models.ImageField(upload_to='frames/')  # Assuming images will be uploaded to a 'frames/' directory
+    title = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10,decimal_places=2)  # Assuming the price can have up to 10 digits with 2 decimal places
+
+    def __str__(self):
+        return self.title
+
+    def delete(self, *args, **kwargs):
+        if self.image:
+            delete_file(self.image.path)
+
+        super().delete(*args, **kwargs)
+
+
 class UserAssets(models.Model):
     user = models.OneToOneField(User,null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200,blank=True)
     level = models.CharField(max_length=200)
+    frame_store = models.ForeignKey(FrameStore, on_delete=models.SET_NULL, null=True, blank=True)
     animation_image = models.CharField(max_length=300,blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.profile.full_name
+
+
 
 class Assets(models.Model):
     name = models.CharField(max_length=200,blank=True)

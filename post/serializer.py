@@ -134,10 +134,10 @@ class PostCreatesreializer(serializers.ModelSerializer):
 
 
 class assetSerializer(serializers.ModelSerializer):
-    xp = serializers.IntegerField(source='user.profile.xp')
+
     class Meta:
         model = UserAssets
-        fields = ['id', 'level', 'xp', 'frame_store', 'vip_system']
+        fields = ['id', 'level', 'frame_store']
         depth = 1
 
 

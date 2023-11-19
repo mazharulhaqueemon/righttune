@@ -20,9 +20,9 @@ from fcm.api.firebase_class import Firebase
 from fcm.api.functions import get_token_by_user
 from fcm.api.push_class import Push
 from post.serializer import assetSerializer, profile_assetSerializer
-from profiles.models import Profile, UserAssets, Assets
+from profiles.models import Profile, UserAssets, Assets,FrameStore
 from .serializers import ProfileSerializer, ProfileDetailsSerializer, ProfileDetailsOfOtherUserSerializer, \
-    FriendSerializer, FriendListSerializer, FriendListProfileSerializer, FollowerSerializer
+    FriendSerializer, FriendListSerializer, FriendListProfileSerializer, FollowerSerializer,FrameStoreSerializer
 from searches.api.serializers import SearchSerializer
 from metazo.utils import compress,delete_file
 
@@ -243,6 +243,36 @@ class ProfileAsset(CreateAPIView):
 
             return Response(serializer.data, status=status.HTTP_200_OK)
 
+##### Frame asset by Emon
+
+class FrameAsset(CreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = UserAssets.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        try:
+            asset = UserAssets.objects.get(user=request.user)
+
+        except UserAssets.DoesNotExist:
+            asset = UserAssets.objects.create(user=request.user)
+
+        frame_id = request.data['id']
+        frame = FrameStore.objects.get(id=frame_id)
+        if request.user.profile.balance < int(frame.price):
+            return Response({'error': 'You do not have enough coins'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            asset.frame_store = frame
+            asset.save()
+            request.user.profile.balance -= int(frame.price)
+            request.user.profile.save()
+            BalanceHistory.objects.create(user=request.user, info=f"Buy frame {frame.title}",
+                                          amount=frame.price)
+        serializer = assetSerializer(asset, many=False)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 
 class AssetList(ListAPIView):
     authentication_classes = [TokenAuthentication]
@@ -311,3 +341,9 @@ class BlockUserViewSet(viewsets.ViewSet):
         serializer = FriendListProfileSerializer(profiles, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class FrameStoreListView(ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = FrameStore.objects.all()
+    serializer_class = FrameStoreSerializer
