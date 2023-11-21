@@ -30,6 +30,7 @@ class LiveStreaming(models.Model):
     isBlocked = models.BooleanField(default=False,null=True)
     priority = models.IntegerField(default=0)
     end_time = models.DateTimeField(null=True, blank=True)
+    max_participants = models.PositiveIntegerField(default=6)
     def __str__(self):
         return self.roomname
 class StreamComment(models.Model):

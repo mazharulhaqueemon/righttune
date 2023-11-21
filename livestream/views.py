@@ -73,6 +73,21 @@ class CreateActiveCallsView(CreateAPIView):
                 active_call_list = ActiveCalls.objects.create(room=stream)
                 active_call_list.active_calls.add(call)
 
+            try:
+                active_call_list = ActiveCalls.objects.get(room=stream)
+
+                # Check if the maximum number of participants is reached
+                if active_call_list.active_calls.count() >= 6:
+                    message = {"error": "Maximum number of participants reached (6 participants allowed)."}
+                    return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+                active_call_list.active_calls.add(call)
+
+            except ActiveCalls.DoesNotExist:
+                active_call_list = ActiveCalls.objects.create(room=stream)
+                active_call_list.active_calls.add(call)
+
+
             active_calls.append(data)
         try:
 
