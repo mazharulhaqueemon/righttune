@@ -1,15 +1,15 @@
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Metazo Admin",
+    "site_title": "Begii Admin",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Metazo",
+    "site_header": "BEGII LIVE",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Metazo",
+    "site_brand": "BEGII LIVE",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "logo/metazo.png",
+    "site_logo": "logo/",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
@@ -27,7 +27,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Welcome to the Metazo Admin Panel",
 
     # Copyright on the footer
-    "copyright": "Metazo",
+    "copyright": "BEGII LIVE",
 
     # The model admin to search from the search bar, search bar omitted if excluded
     "search_model": "accounts.User",
