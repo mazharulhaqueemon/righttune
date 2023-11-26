@@ -216,8 +216,8 @@ class IsFollowed(RetrieveAPIView):
             return Response({"result": False}, status=HTTP_200_OK)
 
 class ProfileAsset(CreateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
     queryset = UserAssets.objects.all()
 
     def create(self, request, *args, **kwargs):
