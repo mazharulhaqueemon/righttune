@@ -20,9 +20,9 @@ from fcm.api.firebase_class import Firebase
 from fcm.api.functions import get_token_by_user
 from fcm.api.push_class import Push
 from post.serializer import assetSerializer, profile_assetSerializer
-from profiles.models import Profile, UserAssets, Assets,FrameStore
+from profiles.models import Profile, UserAssets, Assets,FrameStore,BalanceHistory
 from .serializers import ProfileSerializer, ProfileDetailsSerializer, ProfileDetailsOfOtherUserSerializer, \
-    FriendSerializer, FriendListSerializer, FriendListProfileSerializer, FollowerSerializer,FrameStoreSerializer
+    FriendSerializer, FriendListSerializer, FriendListProfileSerializer, FollowerSerializer,FrameStoreSerializer,BalanceHistorySerializer
 from searches.api.serializers import SearchSerializer
 from metazo.utils import compress,delete_file
 
@@ -246,8 +246,8 @@ class ProfileAsset(CreateAPIView):
 ##### Frame asset by Emon
 
 class FrameAsset(CreateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
     queryset = UserAssets.objects.all()
 
     def create(self, request, *args, **kwargs):
@@ -259,13 +259,13 @@ class FrameAsset(CreateAPIView):
 
         frame_id = request.data['id']
         frame = FrameStore.objects.get(id=frame_id)
-        if request.user.profile.balance < int(frame.price):
+        if request.user.balance.amount < int(frame.price):
             return Response({'error': 'You do not have enough coins'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             asset.frame_store = frame
             asset.save()
-            request.user.profile.balance -= int(frame.price)
-            request.user.profile.save()
+            request.user.balance.amount -= int(frame.price)
+            request.user.balance.save()
             BalanceHistory.objects.create(user=request.user, info=f"Buy frame {frame.title}",
                                           amount=frame.price)
         serializer = assetSerializer(asset, many=False)
@@ -275,8 +275,8 @@ class FrameAsset(CreateAPIView):
 
 
 class AssetList(ListAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         asset_list = Assets.objects.all()
@@ -347,3 +347,8 @@ class FrameStoreListView(ListAPIView):
     # permission_classes = [IsAuthenticated]
     queryset = FrameStore.objects.all()
     serializer_class = FrameStoreSerializer
+
+class BalanceHistoryListAPIView(ListAPIView):
+    serializer_class = BalanceHistorySerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]

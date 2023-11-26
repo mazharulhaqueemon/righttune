@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from accounts.models import User
-from profiles.models import Profile,FrameStore
+from profiles.models import Profile,FrameStore,BalanceHistory
 from favorites.models import FavoriteUser
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class ProfileDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id','user','likes','full_name','slug','email','profile_image','cover_image','birthday','gender','address','registered_date','updated_date',
+        fields = ['id','user','likes','full_name','slug','email','balance', 'profile_frame','profile_image','cover_image','birthday','gender','address','registered_date','updated_date',
         ]
 
     def get_user(self,obj):
@@ -45,7 +45,7 @@ class ProfileDetailsOfOtherUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id','user','likes','is_favorite','full_name','slug','email','profile_image','cover_image','birthday','gender','about','address','registered_date','updated_date']
+        fields = ['id','user','likes','is_favorite','full_name','slug', 'profile_frame','balance','email','profile_image','cover_image','birthday','gender','about','address','registered_date','updated_date']
 
     def get_user(self,obj):
         user_obj = obj.user
@@ -68,7 +68,7 @@ class FriendListProfileSerializer(ProfileDetailsSerializer):
     user = serializers.SerializerMethodField()
     class Meta:
         model = Profile
-        fields = ['id','user','full_name','slug','email','profile_image','cover_image','birthday','gender','registered_date','updated_date']
+        fields = ['id','user','full_name','slug','email','profile_image', 'profile_frame','balance','cover_image','birthday','gender','registered_date','updated_date']
 
     def get_user(self,obj):
         user_obj = obj.user
@@ -92,4 +92,10 @@ class FrameStoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = FrameStore
         fields = '__all__'
+
+
+class BalanceHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BalanceHistory
+        fields = ['info', 'amount', 'created_at']
 

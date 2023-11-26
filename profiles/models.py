@@ -13,6 +13,11 @@ def profile_image_path(instance, filename):
 def profile_image_asset_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
+def profile_frames_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('profiles/frames/', filename)
 
     return os.path.join('profiles/user_asset/',filename)
 def profile_asset_path(instance, filename):
@@ -42,6 +47,8 @@ class Profile(models.Model):
     mobile_number = models.CharField(max_length=250, blank=True, null=True)
     streaming_title = models.CharField(max_length=250, blank=True, null=True)
     balance = models.IntegerField(default=0)
+    profile_frame = models.ImageField(upload_to=profile_frames_path, blank=True, null=True,
+                                      default='profiles/frames/default_profile_frames.png')
     earn_coins = models.IntegerField(default=0)
     earn_loves = models.IntegerField(default=0)
     followers = models.ManyToManyField(User, related_name='following_profile',blank=True,db_constraint=False)
@@ -108,6 +115,15 @@ class Assets(models.Model):
 
     def __str__(self):
         return self.name
+
+class BalanceHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, null=True, related_name='user_balance')
+    info = models.CharField(max_length=250, blank=True, null=True)
+    amount = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+         return f"{self.user.profile.full_name} > Balance: {self.amount} > Info: {str(self.info).split('.')[0]}"
 
 class Follow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')

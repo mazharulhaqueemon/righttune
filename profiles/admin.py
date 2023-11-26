@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,Follow, Stories, StoryImage, UserAssets, Assets,FrameStore
+from .models import Profile,Follow, Stories, StoryImage, UserAssets, Assets,FrameStore,BalanceHistory
 
 admin.site.register(Profile)
 admin.site.register(Follow)
@@ -8,3 +8,4 @@ admin.site.register(StoryImage)
 admin.site.register(Assets)
 admin.site.register(UserAssets)
 admin.site.register(FrameStore)
+admin.site.register(BalanceHistory)
