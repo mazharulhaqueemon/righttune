@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from .views import (
-    ProfileListApiView, ProfileRetrieveApiView,FrameAsset,FrameStoreListView,
+    ProfileListApiView, ProfileRetrieveApiView,FrameAsset,FrameStoreListView,UserAssetListView,
     ProfileUpdateApiView, FriendViewSet, BlockUserViewSet, FollowersViewSet, IsFollowed, ProfileAsset, AssetList,
 )
 router = routers.SimpleRouter()
@@ -19,4 +19,6 @@ urlpatterns=[
     path('assets/',AssetList.as_view()),
     path('self-profile-update/',ProfileUpdateApiView.as_view()),
     path('', include(router.urls), name='add_friend'),
+    path('userasset_list/',UserAssetListView.as_view()),
+
 ]

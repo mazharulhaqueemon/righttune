@@ -348,6 +348,14 @@ class FrameStoreListView(ListAPIView):
     queryset = FrameStore.objects.all()
     serializer_class = FrameStoreSerializer
 
+class UserAssetListView(ListAPIView):
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+    serializer_class = assetSerializer
+
+    def get_queryset(self):
+        return UserAssets.objects.exclude(frame_store=None)
+
 class BalanceHistoryListAPIView(ListAPIView):
     serializer_class = BalanceHistorySerializer
     authentication_classes = [TokenAuthentication]
