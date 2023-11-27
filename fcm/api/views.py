@@ -19,8 +19,8 @@ from agora_token_builder import RtcTokenBuilder
 
 # APP_ID = '10efeca3cee04cd5bdad0c2bdc09f119';
 # APP_CERTIFICATE = '76f664ccd9254775b06becb9c94d8d70';
-APP_ID = 'fb1751907aba4dc293a4848c708f4749'
-APP_CERTIFICATE = '55086a987da64194ba54def7b0d3b9f3'
+APP_ID = 'e749f9fbd4d24cd2a110b362ae374b79'
+APP_CERTIFICATE = '8ea5530578ba4750865376850f058ef7'
 
 
 class AgoraRtcTokenRetrieveApiView(RetrieveAPIView):

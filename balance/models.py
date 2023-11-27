@@ -23,7 +23,7 @@ def deposit_screenshot_image_path(instance, filename):
 
 class Balance(models.Model): 
     user = models.OneToOneField(User,on_delete=models.CASCADE) 
-    amount = models.DecimalField(max_digits=6,decimal_places=2,default=0.0)   
+    amount = models.DecimalField(max_digits=20,decimal_places=2,default=0.0)
     earn_amount = models.DecimalField(max_digits=6,decimal_places=2,default=0.0)    
     updated_datetime = models.DateTimeField(auto_now_add=False,auto_now=False,blank=True,null=True)
 
