@@ -188,7 +188,7 @@ class OtpVerifyApiView(CreateAPIView):
         data_obj = request.data
         phone = data_obj.get('phone', None)
         otp = data_obj.get('code', None)
-        if PhoneOTP.objects.filter(phone__iexact=phone, otp=otp).exist():
+        if PhoneOTP.objects.filter(phone__iexact=phone, otp=otp).exists():
             return Response(status=HTTP_200_OK, )
         else:
             return Response(status=HTTP_400_BAD_REQUEST, )
