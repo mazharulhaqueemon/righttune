@@ -9,7 +9,7 @@ djangorestframework
 gunicorn
 idna
 Pillow
-psycopg2
+psycopg2-binary
 pytz
 requests
 sqlparse
