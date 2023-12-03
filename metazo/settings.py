@@ -95,10 +95,13 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis://red-cjsqbuj6fquc73bml28g:6379')],
+            "hosts": [('127.0.0.1', 6379)],
+            "capacity": 15000,  # default 100
+            "expiry": 10,  # default 60
         },
     },
 }
+# D
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -207,8 +210,8 @@ DEFAULT_FROM_EMAIL = 'emonbakhtiar12@gmail.com'
 CELERY_IMPORTS = [
     'livestream.tasks',
 ]
-CELERY_BROKER_URL = [os.environ.get('REDIS_URL', 'redis://localhost:6379')]
-CELERY_RESULT_BACKEND = [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')]
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
