@@ -24,7 +24,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the Metazo Admin Panel",
+    "welcome_sign": "Welcome to theBEGII LIVE Admin Panel",
 
     # Copyright on the footer
     "copyright": "BEGII LIVE",
