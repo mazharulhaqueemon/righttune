@@ -65,7 +65,7 @@ def compress(image):
 
     wpercent = (mywidth / float(im.size[0]))
     hsize = int((float(im.size[1]) * float(wpercent)))
-    im = im.resize((mywidth, hsize), Image.ANTIALIAS)
+    im = im.resize((mywidth, hsize), Image.Resampling.LANCZOS)
     im.save(im_io,'PNG')
     new_image = File(im_io, name=image.name)
     return new_image

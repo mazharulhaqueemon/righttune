@@ -110,20 +110,20 @@ CHANNEL_LAYERS = {
 #     }
 # }
 #  this database config need for local and c panel config
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'righttunedb_rgml',
-#         'USER': 'righttunedb_rgml_user',
-#         'PASSWORD': '7QTBJeNmnYLpliJMmlXLCEFGbyXbcrLd',
-#         'HOST': 'postgres://righttunedb_rgml_user:7QTBJeNmnYLpliJMmlXLCEFGbyXbcrLd@dpg-cjsqcem8b8as73fdjpn0-a/righttunedb_rgml',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.parse("postgres://righttunedb:A0wt5AgmeTEN427VHXgkddNVyrQwsyzl@dpg-clhr3v4pfg1c7382kdgg-a.singapore-postgres.render.com/righttunedb_3md6")
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'begilivedb',
+        'USER': 'begilivedbuser',
+        'PASSWORD': 'begilivedbuser',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.parse("postgres://righttunedb:A0wt5AgmeTEN427VHXgkddNVyrQwsyzl@dpg-clhr3v4pfg1c7382kdgg-a.singapore-postgres.render.com/righttunedb_3md6")
+# }
 
 
 
