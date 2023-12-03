@@ -4,7 +4,7 @@ from rest_framework import routers
 from .views import (
     CreateTokenView, RegisterWithProfileCreateApiView, LogoutCreateApiView,
     ChangePasswordUpdateApiView, PasswordResetOtpCreateApiView, ResetPasswordUpdateApiView, SupportViewSet,
-    AccountDeleteapi,
+    AccountDeleteapi, OtpVerifyApiView,
 )
 router = routers.SimpleRouter()
 router.register(r'Supports', SupportViewSet, basename='support')
@@ -17,5 +17,6 @@ urlpatterns=[
     path('password-reset-otp-create/',PasswordResetOtpCreateApiView.as_view()),
     path("reset-password/",ResetPasswordUpdateApiView.as_view()),
     path("delete/",AccountDeleteapi.as_view()),
+    path("otp-verify/", OtpVerifyApiView.as_view()),
     path('', include(router.urls), name='supports'),
 ]

@@ -3,16 +3,17 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import PermissionsMixin
 
+
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self,phone,password=None,is_staff=False,is_active=True,is_admin=False):
+    def create_user(self, phone, password=None, is_staff=False, is_active=True, is_admin=False):
         if not phone:
             raise ValueError("User must have a phone number")
         if not password:
             raise ValueError("User must have a password")
 
         user_obj = self.model(
-            phone = phone
+            phone=phone
         )
         user_obj.set_password(password)
         user_obj.staff = is_staff
@@ -21,7 +22,7 @@ class UserManager(BaseUserManager):
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staffuser(self,phone,password=None):
+    def create_staffuser(self, phone, password=None):
         user = self.create_user(
             phone,
             password=password,
@@ -29,7 +30,7 @@ class UserManager(BaseUserManager):
         )
         return user
 
-    def create_superuser(self,phone,password=None):
+    def create_superuser(self, phone, password=None):
         user = self.create_user(
             phone,
             password=password,
@@ -38,11 +39,12 @@ class UserManager(BaseUserManager):
         )
         return user
 
-class User(AbstractBaseUser,PermissionsMixin):
+
+class User(AbstractBaseUser, PermissionsMixin):
     # phone_regex = RegexValidator(regex = r'^\+?1?\d{9,14}$',message="Phone number must be 11 digits")
     # phone = models.CharField(validators=[phone_regex],max_length=11,unique=True)
-    phone = models.CharField(max_length=14,unique=True,verbose_name='Mobile Number (use +88)')
-    name = models.CharField(max_length=20,blank=True,null=True)
+    phone = models.CharField(max_length=14, unique=True, verbose_name='Mobile Number (use +88)')
+    name = models.CharField(max_length=20, blank=True, null=True)
     first_login = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -64,15 +66,15 @@ class User(AbstractBaseUser,PermissionsMixin):
     def get_short_name(self):
         return self.phone
 
-    def has_perm(self,perm,obj=None):
+    def has_perm(self, perm, obj=None):
         return True
 
-    def has_module_perms(self,app_label):
+    def has_module_perms(self, app_label):
         return True
 
     @property
     def is_staff(self):
-        return self.staff 
+        return self.staff
 
     @property
     def is_admin(self):
@@ -90,15 +92,15 @@ class User(AbstractBaseUser,PermissionsMixin):
 class PhoneOTP(models.Model):
     # phone_regex = RegexValidator(regex = r'^\+?1?\d{9,14}$',message="Phone number must be 11 digits")
     # phone = models.CharField(validators=[phone_regex],max_length=11)
-    phone = models.CharField(max_length=14,unique=True)
-    otp = models.CharField(max_length=9,blank=True,null=True)
-    count = models.IntegerField(default=0,help_text="Number of code sent")
+    phone = models.CharField(max_length=14, unique=True)
+    otp = models.CharField(max_length=9, blank=True, null=True)
+    count = models.IntegerField(default=0, help_text="Number of code sent")
     validated = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.phone) + ' is sent ' +str(self.otp)
+        return str(self.phone) + ' is sent ' + str(self.otp)
 
 
 class Support(models.Model):
-    profile = models.ForeignKey("profiles.Profile",on_delete=models.DO_NOTHING)
-    text = models.CharField(max_length=5000,null=True)
+    profile = models.ForeignKey("profiles.Profile", on_delete=models.DO_NOTHING)
+    text = models.CharField(max_length=5000, null=True)
